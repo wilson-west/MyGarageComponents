@@ -1,0 +1,597 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DotNetNukeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="mhc_AutoImages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AutoId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="mhc_AutosId" Type="int" Nullable="false" />
+          <Property Name="mhc_Images_ImageId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mhc_Autos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Make" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Model" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Year" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Cost" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RecordStatus" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mhc_Images">
+          <Key>
+            <PropertyRef Name="ImageId" />
+          </Key>
+          <Property Name="ImageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImageDescription" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Path" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mhc_ItemType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeDesc" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mhc_Likes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Item_id" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Item_type" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RecordStatus" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AuditDateTime" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Liked" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="mhc_ItemType_Id" Type="int" Nullable="false" />
+          <Property Name="mhc_Images_ImageId" Type="int" Nullable="false" />
+          <Property Name="mhc_Autos_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mhc_TaskImages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TaskId" Type="int" Nullable="false" />
+          <Property Name="mhc_TasksId" Type="int" Nullable="false" />
+          <Property Name="mhc_Images_ImageId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mhc_Tasks">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TaskName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TaskDescription" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ParentTaskId" Type="int" Nullable="false" />
+          <Property Name="SortOrder" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="HoursEstimate" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="HoursActual" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CostEstimate" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CostActual" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TaskStatus" Type="smallint" Nullable="false" />
+          <Property Name="RecordStatus" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TaskId" Type="int" Nullable="false" />
+          <Property Name="mhc_AutosId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_mhc_AutoImagesmhc_Images">
+          <End Role="mhc_Images" Type="Self.mhc_Images" Multiplicity="1" />
+          <End Role="mhc_AutoImages" Type="Self.mhc_AutoImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mhc_Images">
+              <PropertyRef Name="ImageId" />
+            </Principal>
+            <Dependent Role="mhc_AutoImages">
+              <PropertyRef Name="mhc_Images_ImageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mhc_Autosmhc_AutoImages">
+          <End Role="mhc_Autos" Type="Self.mhc_Autos" Multiplicity="1" />
+          <End Role="mhc_AutoImages" Type="Self.mhc_AutoImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mhc_Autos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="mhc_AutoImages">
+              <PropertyRef Name="mhc_AutosId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mhc_Autosmhc_Tasks">
+          <End Role="mhc_Autos" Type="Self.mhc_Autos" Multiplicity="1" />
+          <End Role="mhc_Tasks" Type="Self.mhc_Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mhc_Autos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="mhc_Tasks">
+              <PropertyRef Name="mhc_AutosId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mhc_Likesmhc_Autos">
+          <End Role="mhc_Autos" Type="Self.mhc_Autos" Multiplicity="1" />
+          <End Role="mhc_Likes" Type="Self.mhc_Likes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mhc_Autos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="mhc_Likes">
+              <PropertyRef Name="mhc_Autos_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mhc_Likesmhc_Images">
+          <End Role="mhc_Images" Type="Self.mhc_Images" Multiplicity="1" />
+          <End Role="mhc_Likes" Type="Self.mhc_Likes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mhc_Images">
+              <PropertyRef Name="ImageId" />
+            </Principal>
+            <Dependent Role="mhc_Likes">
+              <PropertyRef Name="mhc_Images_ImageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mhc_Likesmhc_ItemType">
+          <End Role="mhc_ItemType" Type="Self.mhc_ItemType" Multiplicity="1" />
+          <End Role="mhc_Likes" Type="Self.mhc_Likes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mhc_ItemType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="mhc_Likes">
+              <PropertyRef Name="mhc_ItemType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mhc_TaskImagesmhc_Images">
+          <End Role="mhc_Images" Type="Self.mhc_Images" Multiplicity="1" />
+          <End Role="mhc_TaskImages" Type="Self.mhc_TaskImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mhc_Images">
+              <PropertyRef Name="ImageId" />
+            </Principal>
+            <Dependent Role="mhc_TaskImages">
+              <PropertyRef Name="mhc_Images_ImageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mhc_Tasksmhc_TaskImages">
+          <End Role="mhc_Tasks" Type="Self.mhc_Tasks" Multiplicity="1" />
+          <End Role="mhc_TaskImages" Type="Self.mhc_TaskImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mhc_Tasks">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="mhc_TaskImages">
+              <PropertyRef Name="mhc_TasksId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DotNetNukeModelStoreContainer">
+          <EntitySet Name="mhc_AutoImages" EntityType="Self.mhc_AutoImages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mhc_Autos" EntityType="Self.mhc_Autos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mhc_Images" EntityType="Self.mhc_Images" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mhc_ItemType" EntityType="Self.mhc_ItemType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mhc_Likes" EntityType="Self.mhc_Likes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mhc_TaskImages" EntityType="Self.mhc_TaskImages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mhc_Tasks" EntityType="Self.mhc_Tasks" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_mhc_AutoImagesmhc_Images" Association="Self.FK_mhc_AutoImagesmhc_Images">
+            <End Role="mhc_Images" EntitySet="mhc_Images" />
+            <End Role="mhc_AutoImages" EntitySet="mhc_AutoImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mhc_Autosmhc_AutoImages" Association="Self.FK_mhc_Autosmhc_AutoImages">
+            <End Role="mhc_Autos" EntitySet="mhc_Autos" />
+            <End Role="mhc_AutoImages" EntitySet="mhc_AutoImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mhc_Autosmhc_Tasks" Association="Self.FK_mhc_Autosmhc_Tasks">
+            <End Role="mhc_Autos" EntitySet="mhc_Autos" />
+            <End Role="mhc_Tasks" EntitySet="mhc_Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mhc_Likesmhc_Autos" Association="Self.FK_mhc_Likesmhc_Autos">
+            <End Role="mhc_Autos" EntitySet="mhc_Autos" />
+            <End Role="mhc_Likes" EntitySet="mhc_Likes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mhc_Likesmhc_Images" Association="Self.FK_mhc_Likesmhc_Images">
+            <End Role="mhc_Images" EntitySet="mhc_Images" />
+            <End Role="mhc_Likes" EntitySet="mhc_Likes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mhc_Likesmhc_ItemType" Association="Self.FK_mhc_Likesmhc_ItemType">
+            <End Role="mhc_ItemType" EntitySet="mhc_ItemType" />
+            <End Role="mhc_Likes" EntitySet="mhc_Likes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mhc_TaskImagesmhc_Images" Association="Self.FK_mhc_TaskImagesmhc_Images">
+            <End Role="mhc_Images" EntitySet="mhc_Images" />
+            <End Role="mhc_TaskImages" EntitySet="mhc_TaskImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mhc_Tasksmhc_TaskImages" Association="Self.FK_mhc_Tasksmhc_TaskImages">
+            <End Role="mhc_Tasks" EntitySet="mhc_Tasks" />
+            <End Role="mhc_TaskImages" EntitySet="mhc_TaskImages" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DotNetNukeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="mhc_AutoImages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AutoId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="mhc_AutosId" Type="Int32" Nullable="false" />
+          <Property Name="mhc_Images_ImageId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="mhc_Images" Relationship="Self.FK_mhc_AutoImagesmhc_Images" FromRole="mhc_AutoImages" ToRole="mhc_Images" />
+          <NavigationProperty Name="mhc_Autos" Relationship="Self.FK_mhc_Autosmhc_AutoImages" FromRole="mhc_AutoImages" ToRole="mhc_Autos" />
+        </EntityType>
+        <EntityType Name="mhc_Autos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Make" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Year" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cost" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RecordStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="mhc_AutoImages" Relationship="Self.FK_mhc_Autosmhc_AutoImages" FromRole="mhc_Autos" ToRole="mhc_AutoImages" />
+          <NavigationProperty Name="mhc_Tasks" Relationship="Self.FK_mhc_Autosmhc_Tasks" FromRole="mhc_Autos" ToRole="mhc_Tasks" />
+          <NavigationProperty Name="mhc_Likes" Relationship="Self.FK_mhc_Likesmhc_Autos" FromRole="mhc_Autos" ToRole="mhc_Likes" />
+        </EntityType>
+        <EntityType Name="mhc_Images">
+          <Key>
+            <PropertyRef Name="ImageId" />
+          </Key>
+          <Property Name="ImageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImageDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="mhc_AutoImages" Relationship="Self.FK_mhc_AutoImagesmhc_Images" FromRole="mhc_Images" ToRole="mhc_AutoImages" />
+          <NavigationProperty Name="mhc_Likes" Relationship="Self.FK_mhc_Likesmhc_Images" FromRole="mhc_Images" ToRole="mhc_Likes" />
+          <NavigationProperty Name="mhc_TaskImages" Relationship="Self.FK_mhc_TaskImagesmhc_Images" FromRole="mhc_Images" ToRole="mhc_TaskImages" />
+        </EntityType>
+        <EntityType Name="mhc_ItemType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="mhc_Likes" Relationship="Self.FK_mhc_Likesmhc_ItemType" FromRole="mhc_ItemType" ToRole="mhc_Likes" />
+        </EntityType>
+        <EntityType Name="mhc_Likes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Item_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Item_type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RecordStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AuditDateTime" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Liked" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="mhc_ItemType_Id" Type="Int32" Nullable="false" />
+          <Property Name="mhc_Images_ImageId" Type="Int32" Nullable="false" />
+          <Property Name="mhc_Autos_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="mhc_Autos" Relationship="Self.FK_mhc_Likesmhc_Autos" FromRole="mhc_Likes" ToRole="mhc_Autos" />
+          <NavigationProperty Name="mhc_Images" Relationship="Self.FK_mhc_Likesmhc_Images" FromRole="mhc_Likes" ToRole="mhc_Images" />
+          <NavigationProperty Name="mhc_ItemType" Relationship="Self.FK_mhc_Likesmhc_ItemType" FromRole="mhc_Likes" ToRole="mhc_ItemType" />
+        </EntityType>
+        <EntityType Name="mhc_TaskImages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaskId" Type="Int32" Nullable="false" />
+          <Property Name="mhc_TasksId" Type="Int32" Nullable="false" />
+          <Property Name="mhc_Images_ImageId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="mhc_Images" Relationship="Self.FK_mhc_TaskImagesmhc_Images" FromRole="mhc_TaskImages" ToRole="mhc_Images" />
+          <NavigationProperty Name="mhc_Tasks" Relationship="Self.FK_mhc_Tasksmhc_TaskImages" FromRole="mhc_TaskImages" ToRole="mhc_Tasks" />
+        </EntityType>
+        <EntityType Name="mhc_Tasks">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaskName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TaskDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ParentTaskId" Type="Int32" Nullable="false" />
+          <Property Name="SortOrder" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HoursEstimate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HoursActual" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CostEstimate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CostActual" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TaskStatus" Type="Int16" Nullable="false" />
+          <Property Name="RecordStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TaskId" Type="Int32" Nullable="false" />
+          <Property Name="mhc_AutosId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="mhc_Autos" Relationship="Self.FK_mhc_Autosmhc_Tasks" FromRole="mhc_Tasks" ToRole="mhc_Autos" />
+          <NavigationProperty Name="mhc_TaskImages" Relationship="Self.FK_mhc_Tasksmhc_TaskImages" FromRole="mhc_Tasks" ToRole="mhc_TaskImages" />
+          <NavigationProperty Name="mhc_Tasks2" Relationship="DotNetNukeModel.mhc_Tasksmhc_ParentTasks" FromRole="mhc_Tasks" ToRole="mhc_Tasks1" />
+          <NavigationProperty Name="mhc_ParentTasks1" Relationship="DotNetNukeModel.mhc_Tasksmhc_ParentTasks" FromRole="mhc_Tasks1" ToRole="mhc_Tasks" />
+        </EntityType>
+        <Association Name="FK_mhc_AutoImagesmhc_Images">
+          <End Role="mhc_Images" Type="Self.mhc_Images" Multiplicity="1" />
+          <End Role="mhc_AutoImages" Type="Self.mhc_AutoImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mhc_Images">
+              <PropertyRef Name="ImageId" />
+            </Principal>
+            <Dependent Role="mhc_AutoImages">
+              <PropertyRef Name="mhc_Images_ImageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mhc_Autosmhc_AutoImages">
+          <End Role="mhc_Autos" Type="Self.mhc_Autos" Multiplicity="1" />
+          <End Role="mhc_AutoImages" Type="Self.mhc_AutoImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mhc_Autos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="mhc_AutoImages">
+              <PropertyRef Name="mhc_AutosId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mhc_Autosmhc_Tasks">
+          <End Role="mhc_Autos" Type="Self.mhc_Autos" Multiplicity="1" />
+          <End Role="mhc_Tasks" Type="Self.mhc_Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mhc_Autos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="mhc_Tasks">
+              <PropertyRef Name="mhc_AutosId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mhc_Likesmhc_Autos">
+          <End Role="mhc_Autos" Type="Self.mhc_Autos" Multiplicity="1" />
+          <End Role="mhc_Likes" Type="Self.mhc_Likes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mhc_Autos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="mhc_Likes">
+              <PropertyRef Name="mhc_Autos_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mhc_Likesmhc_Images">
+          <End Role="mhc_Images" Type="Self.mhc_Images" Multiplicity="1" />
+          <End Role="mhc_Likes" Type="Self.mhc_Likes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mhc_Images">
+              <PropertyRef Name="ImageId" />
+            </Principal>
+            <Dependent Role="mhc_Likes">
+              <PropertyRef Name="mhc_Images_ImageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mhc_TaskImagesmhc_Images">
+          <End Role="mhc_Images" Type="Self.mhc_Images" Multiplicity="1" />
+          <End Role="mhc_TaskImages" Type="Self.mhc_TaskImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mhc_Images">
+              <PropertyRef Name="ImageId" />
+            </Principal>
+            <Dependent Role="mhc_TaskImages">
+              <PropertyRef Name="mhc_Images_ImageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mhc_Likesmhc_ItemType">
+          <End Role="mhc_ItemType" Type="Self.mhc_ItemType" Multiplicity="1" />
+          <End Role="mhc_Likes" Type="Self.mhc_Likes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mhc_ItemType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="mhc_Likes">
+              <PropertyRef Name="mhc_ItemType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mhc_Tasksmhc_TaskImages">
+          <End Role="mhc_Tasks" Type="Self.mhc_Tasks" Multiplicity="1" />
+          <End Role="mhc_TaskImages" Type="Self.mhc_TaskImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mhc_Tasks">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="mhc_TaskImages">
+              <PropertyRef Name="mhc_TasksId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MyHobbyCarEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="mhc_AutoImages" EntityType="Self.mhc_AutoImages" />
+          <EntitySet Name="mhc_Autos" EntityType="Self.mhc_Autos" />
+          <EntitySet Name="mhc_Images" EntityType="Self.mhc_Images" />
+          <EntitySet Name="mhc_ItemType" EntityType="Self.mhc_ItemType" />
+          <EntitySet Name="mhc_Likes" EntityType="Self.mhc_Likes" />
+          <EntitySet Name="mhc_TaskImages" EntityType="Self.mhc_TaskImages" />
+          <EntitySet Name="mhc_Tasks" EntityType="Self.mhc_Tasks" />
+          <AssociationSet Name="FK_mhc_AutoImagesmhc_Images" Association="Self.FK_mhc_AutoImagesmhc_Images">
+            <End Role="mhc_Images" EntitySet="mhc_Images" />
+            <End Role="mhc_AutoImages" EntitySet="mhc_AutoImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mhc_Autosmhc_AutoImages" Association="Self.FK_mhc_Autosmhc_AutoImages">
+            <End Role="mhc_Autos" EntitySet="mhc_Autos" />
+            <End Role="mhc_AutoImages" EntitySet="mhc_AutoImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mhc_Autosmhc_Tasks" Association="Self.FK_mhc_Autosmhc_Tasks">
+            <End Role="mhc_Autos" EntitySet="mhc_Autos" />
+            <End Role="mhc_Tasks" EntitySet="mhc_Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mhc_Likesmhc_Autos" Association="Self.FK_mhc_Likesmhc_Autos">
+            <End Role="mhc_Autos" EntitySet="mhc_Autos" />
+            <End Role="mhc_Likes" EntitySet="mhc_Likes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mhc_Likesmhc_Images" Association="Self.FK_mhc_Likesmhc_Images">
+            <End Role="mhc_Images" EntitySet="mhc_Images" />
+            <End Role="mhc_Likes" EntitySet="mhc_Likes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mhc_TaskImagesmhc_Images" Association="Self.FK_mhc_TaskImagesmhc_Images">
+            <End Role="mhc_Images" EntitySet="mhc_Images" />
+            <End Role="mhc_TaskImages" EntitySet="mhc_TaskImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mhc_Likesmhc_ItemType" Association="Self.FK_mhc_Likesmhc_ItemType">
+            <End Role="mhc_ItemType" EntitySet="mhc_ItemType" />
+            <End Role="mhc_Likes" EntitySet="mhc_Likes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mhc_Tasksmhc_TaskImages" Association="Self.FK_mhc_Tasksmhc_TaskImages">
+            <End Role="mhc_Tasks" EntitySet="mhc_Tasks" />
+            <End Role="mhc_TaskImages" EntitySet="mhc_TaskImages" />
+          </AssociationSet>
+          <AssociationSet Name="mhc_Tasksmhc_ParentTasks" Association="DotNetNukeModel.mhc_Tasksmhc_ParentTasks">
+            <End Role="mhc_Tasks" EntitySet="mhc_Tasks" />
+            <End Role="mhc_Tasks1" EntitySet="mhc_Tasks" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="mhc_Tasksmhc_ParentTasks">
+          <End Type="DotNetNukeModel.mhc_Tasks" Role="mhc_Tasks" Multiplicity="1" />
+          <End Type="DotNetNukeModel.mhc_Tasks" Role="mhc_Tasks1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mhc_Tasks">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="mhc_Tasks1">
+              <PropertyRef Name="ParentTaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DotNetNukeModelStoreContainer" CdmEntityContainer="MyHobbyCarEntities">
+          <EntitySetMapping Name="mhc_AutoImages">
+            <EntityTypeMapping TypeName="DotNetNukeModel.mhc_AutoImages">
+              <MappingFragment StoreEntitySet="mhc_AutoImages">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="mhc_AutosId" ColumnName="mhc_AutosId" />
+                <ScalarProperty Name="mhc_Images_ImageId" ColumnName="mhc_Images_ImageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mhc_Autos">
+            <EntityTypeMapping TypeName="DotNetNukeModel.mhc_Autos">
+              <MappingFragment StoreEntitySet="mhc_Autos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Make" ColumnName="Make" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="RecordStatus" ColumnName="RecordStatus" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mhc_Images">
+            <EntityTypeMapping TypeName="DotNetNukeModel.mhc_Images">
+              <MappingFragment StoreEntitySet="mhc_Images">
+                <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+                <ScalarProperty Name="ImageDescription" ColumnName="ImageDescription" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mhc_ItemType">
+            <EntityTypeMapping TypeName="DotNetNukeModel.mhc_ItemType">
+              <MappingFragment StoreEntitySet="mhc_ItemType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TypeDesc" ColumnName="TypeDesc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mhc_Likes">
+            <EntityTypeMapping TypeName="DotNetNukeModel.mhc_Likes">
+              <MappingFragment StoreEntitySet="mhc_Likes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Item_id" ColumnName="Item_id" />
+                <ScalarProperty Name="Item_type" ColumnName="Item_type" />
+                <ScalarProperty Name="RecordStatus" ColumnName="RecordStatus" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AuditDateTime" ColumnName="AuditDateTime" />
+                <ScalarProperty Name="Liked" ColumnName="Liked" />
+                <ScalarProperty Name="mhc_ItemType_Id" ColumnName="mhc_ItemType_Id" />
+                <ScalarProperty Name="mhc_Images_ImageId" ColumnName="mhc_Images_ImageId" />
+                <ScalarProperty Name="mhc_Autos_Id" ColumnName="mhc_Autos_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mhc_TaskImages">
+            <EntityTypeMapping TypeName="DotNetNukeModel.mhc_TaskImages">
+              <MappingFragment StoreEntitySet="mhc_TaskImages">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="mhc_TasksId" ColumnName="mhc_TasksId" />
+                <ScalarProperty Name="mhc_Images_ImageId" ColumnName="mhc_Images_ImageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mhc_Tasks">
+            <EntityTypeMapping TypeName="DotNetNukeModel.mhc_Tasks">
+              <MappingFragment StoreEntitySet="mhc_Tasks">
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="TaskName" ColumnName="TaskName" />
+                <ScalarProperty Name="TaskDescription" ColumnName="TaskDescription" />
+                <ScalarProperty Name="ParentTaskId" ColumnName="ParentTaskId" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="HoursEstimate" ColumnName="HoursEstimate" />
+                <ScalarProperty Name="HoursActual" ColumnName="HoursActual" />
+                <ScalarProperty Name="CostEstimate" ColumnName="CostEstimate" />
+                <ScalarProperty Name="CostActual" ColumnName="CostActual" />
+                <ScalarProperty Name="TaskStatus" ColumnName="TaskStatus" />
+                <ScalarProperty Name="RecordStatus" ColumnName="RecordStatus" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="mhc_AutosId" ColumnName="mhc_AutosId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ff26e1b4f2bd4b348efd40c70b1cb53b" Name="Diagram1">
+        <EntityTypeShape EntityType="DotNetNukeModel.mhc_AutoImages" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DotNetNukeModel.mhc_Autos" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DotNetNukeModel.mhc_Images" Width="1.5" PointX="3.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DotNetNukeModel.mhc_ItemType" Width="1.5" PointX="6.875" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DotNetNukeModel.mhc_Likes" Width="1.5" PointX="6.625" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DotNetNukeModel.mhc_TaskImages" Width="1.5" PointX="5" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DotNetNukeModel.mhc_Tasks" Width="1.5" PointX="3.125" PointY="9.25" IsExpanded="true" />
+        <AssociationConnector Association="DotNetNukeModel.FK_mhc_AutoImagesmhc_Images" ManuallyRouted="false" />
+        <AssociationConnector Association="DotNetNukeModel.FK_mhc_Autosmhc_AutoImages" ManuallyRouted="false" />
+        <AssociationConnector Association="DotNetNukeModel.FK_mhc_Autosmhc_Tasks" ManuallyRouted="false" />
+        <AssociationConnector Association="DotNetNukeModel.FK_mhc_Likesmhc_Autos" ManuallyRouted="false" />
+        <AssociationConnector Association="DotNetNukeModel.FK_mhc_Likesmhc_Images" ManuallyRouted="false" />
+        <AssociationConnector Association="DotNetNukeModel.FK_mhc_TaskImagesmhc_Images" ManuallyRouted="false" />
+        <AssociationConnector Association="DotNetNukeModel.FK_mhc_Likesmhc_ItemType" ManuallyRouted="false" />
+        <AssociationConnector Association="DotNetNukeModel.FK_mhc_Tasksmhc_TaskImages" ManuallyRouted="false" />
+        <AssociationConnector Association="DotNetNukeModel.mhc_Tasksmhc_ParentTasks" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
